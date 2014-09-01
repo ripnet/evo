@@ -1,0 +1,62 @@
+{% extends "::base.html.twig" %}
+{% block body %}
+    <div class="container">
+    <div class="row">
+        <div class="col-md-12">
+            <form role="form" id="selectform">
+                <div class="form-group">
+                    <label for="file">Select File:</label>
+                    <select id="file" name="file" class="form-control">
+                        {% for file in files %}
+                            <option value="{{ file.id }}">{{ file.name }}</option>
+                        {% endfor %}
+                    </select>
+                </div>
+                <div class="form-group">
+                    <button class="btn btn-info" id="display-button" type="submit">Display Contents</button>
+                    <a class="btn btn-success" id="download">Download File</a>
+                </div>
+            </form>
+        </div>
+    </div>
+    <div class="row top-buffer">
+        <div class="col-md-12">
+            <pre id="codepre" class="prettyprint lang-xml" style="display: none;">
+                <div id="xmlData"></div>
+            </pre>
+        </div>
+    </div>
+    </div>
+{% endblock %}
+
+{% block javascripts %}
+    <script src="https://google-code-prettify.googlecode.com/svn/loader/prettify.js"></script>
+    <script type="text/javascript">
+        $(function () {
+            hidden = true;
+            var frm = $('#selectform');
+            frm.submit(function (ev) {
+                $.post("/getDownload/" + $("#file").val())
+                        .done(function (data) {
+                            $("#xmlData").html(data);
+                            if (hidden) {
+                                hidden = false;
+                                $("#codepre").toggle();
+                            }
+                            $("#codepre").removeClass("prettyprinted");
+                            $("#codepre").classList
+
+                            prettyPrint();
+                        });
+                ev.preventDefault();
+            });
+            $("#download").click(function () {
+               window.location = "/fileDownload/" + $("#file").val();
+            });
+
+        });
+    </script>
+{% endblock %}
+{% block stylesheets %}
+<link href="{{ asset("css/prettify.css") }}" rel="stylesheet">
+{% endblock %}

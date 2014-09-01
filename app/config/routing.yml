@@ -1,0 +1,5 @@
+ripnet_evo:
+    resource: "@ripnetEvoBundle/Controller/"
+    type:     annotation
+    prefix:   /
+
