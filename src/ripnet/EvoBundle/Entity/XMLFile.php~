@@ -26,4 +26,60 @@ class XMLFile
      */
     protected $contents;
 
+
+    /**
+     * Get id
+     *
+     * @return integer 
+     */
+    public function getId()
+    {
+        return $this->id;
+    }
+
+    /**
+     * Set name
+     *
+     * @param string $name
+     * @return XMLFile
+     */
+    public function setName($name)
+    {
+        $this->name = $name;
+
+        return $this;
+    }
+
+    /**
+     * Get name
+     *
+     * @return string 
+     */
+    public function getName()
+    {
+        return $this->name;
+    }
+
+    /**
+     * Set contents
+     *
+     * @param string $contents
+     * @return XMLFile
+     */
+    public function setContents($contents)
+    {
+        $this->contents = $contents;
+
+        return $this;
+    }
+
+    /**
+     * Get contents
+     *
+     * @return string 
+     */
+    public function getContents()
+    {
+        return $this->contents;
+    }
 }

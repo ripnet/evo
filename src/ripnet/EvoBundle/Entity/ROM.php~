@@ -1,0 +1,41 @@
+<?php
+namespace ripnet\EvoBundle\Entity;
+
+use Doctrine\ORM\Mapping as ORM;
+
+/**
+ * @ORM\Entity
+ * @ORM\Table(name="rom")
+ */
+class ROM
+{
+    /**
+     * @ORM\Column(type="integer")
+     * @ORM\Id
+     * @ORM\GeneratedValue(strategy="AUTO")
+     */
+    protected $id;
+
+    /**
+     * @ORM\Column(type="string", length=9)
+     */
+    protected $year;
+
+    /**
+     * @ORM\Column(type="string", length=255)
+     */
+    protected $vehicle;
+
+    /**
+     * @ORM\OneToMany(targetEntity="ROM", mappedBy="parent")
+     */
+    protected $children;
+
+    /**
+     * @ORM\ManyToOne(targetEntity="ROM", inversedBy="children")
+     * @ORM\JoinColumn(name="parent", referencedColumnName="id")
+     */
+    protected $parent;
+
+
+}
