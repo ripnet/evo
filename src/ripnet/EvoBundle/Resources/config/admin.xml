@@ -1,0 +1,12 @@
+<container xmlns="http://symfony.com/schema/dic/services"
+           xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+           xsi:schemaLocation="http://symfony.com/schema/dic/services/services-1.0.xsd">
+    <services>
+        <service id="sonata.admin.rom" class="ripnet\EvoBundle\Admin\ROMAdmin">
+            <tag name="sonata.admin" manager_type="orm" group="Content" label="ROM"/>
+            <argument />
+            <argument>ripnet\EvoBundle\Entity\ROM</argument>
+            <argument />
+        </service>
+    </services>
+</container>

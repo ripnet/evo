@@ -18,7 +18,7 @@ class ROM
 
 
     /**
-     * @ORM\Column(type="string", length=128)
+     * @ORM\Column(type="string", length=128, unique=true)
      */
     protected $xmlid;
 
@@ -84,7 +84,7 @@ class ROM
 
     /**
      * @ORM\ManyToOne(targetEntity="ROM", inversedBy="children")
-     * @ORM\JoinColumn(name="parent", referencedColumnName="id")
+     * @ORM\JoinColumn(name="parent", referencedColumnName="id", nullable=true)
      */
     protected $parent;
 
@@ -95,6 +95,11 @@ class ROM
     public function __construct()
     {
         $this->children = new \Doctrine\Common\Collections\ArrayCollection();
+    }
+
+    public function __toString()
+    {
+        return $this->getXmlid();
     }
 
     /**
