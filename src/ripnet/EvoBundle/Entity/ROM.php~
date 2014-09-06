@@ -16,15 +16,66 @@ class ROM
      */
     protected $id;
 
+
+    /**
+     * @ORM\Column(type="string", length=128)
+     */
+    protected $xmlid;
+
+    /**
+     * @ORM\Column(type="string", length=128)
+     */
+    protected $internalidaddress;
+
+    /**
+     * @ORM\Column(type="string", length=128)
+     */
+    protected $internalidhex;
+
+    /**
+     * @ORM\Column(type="string", length=128)
+     */
+    protected $make;
+
+    /**
+     * @ORM\Column(type="string", length=128)
+     */
+    protected $market;
+
+    /**
+     * @ORM\Column(type="string", length=128)
+     */
+    protected $model;
+
+    /**
+     * @ORM\Column(type="string", length=255)
+     */
+    protected $submodel;
+
+    /**
+     * @ORM\Column(type="string", length=128)
+     */
+    protected $transmission;
+
     /**
      * @ORM\Column(type="string", length=9)
      */
     protected $year;
 
     /**
-     * @ORM\Column(type="string", length=255)
+     * @ORM\Column(type="string", length=128)
      */
-    protected $vehicle;
+    protected $flashmethod;
+
+    /**
+     * @ORM\Column(type="string", length=128)
+     */
+    protected $memmodel;
+
+    /**
+     * @ORM\Column(type="string", length=128)
+     */
+    protected $checksummodule;
 
     /**
      * @ORM\OneToMany(targetEntity="ROM", mappedBy="parent")
@@ -38,4 +89,123 @@ class ROM
     protected $parent;
 
 
+    /**
+     * Constructor
+     */
+    public function __construct()
+    {
+        $this->children = new \Doctrine\Common\Collections\ArrayCollection();
+    }
+
+    /**
+     * Get id
+     *
+     * @return integer 
+     */
+    public function getId()
+    {
+        return $this->id;
+    }
+
+    /**
+     * Set year
+     *
+     * @param string $year
+     * @return ROM
+     */
+    public function setYear($year)
+    {
+        $this->year = $year;
+
+        return $this;
+    }
+
+    /**
+     * Get year
+     *
+     * @return string 
+     */
+    public function getYear()
+    {
+        return $this->year;
+    }
+
+    /**
+     * Set vehicle
+     *
+     * @param string $vehicle
+     * @return ROM
+     */
+    public function setVehicle($vehicle)
+    {
+        $this->vehicle = $vehicle;
+
+        return $this;
+    }
+
+    /**
+     * Get vehicle
+     *
+     * @return string 
+     */
+    public function getVehicle()
+    {
+        return $this->vehicle;
+    }
+
+    /**
+     * Add children
+     *
+     * @param \ripnet\EvoBundle\Entity\ROM $children
+     * @return ROM
+     */
+    public function addChild(\ripnet\EvoBundle\Entity\ROM $children)
+    {
+        $this->children[] = $children;
+
+        return $this;
+    }
+
+    /**
+     * Remove children
+     *
+     * @param \ripnet\EvoBundle\Entity\ROM $children
+     */
+    public function removeChild(\ripnet\EvoBundle\Entity\ROM $children)
+    {
+        $this->children->removeElement($children);
+    }
+
+    /**
+     * Get children
+     *
+     * @return \Doctrine\Common\Collections\Collection 
+     */
+    public function getChildren()
+    {
+        return $this->children;
+    }
+
+    /**
+     * Set parent
+     *
+     * @param \ripnet\EvoBundle\Entity\ROM $parent
+     * @return ROM
+     */
+    public function setParent(\ripnet\EvoBundle\Entity\ROM $parent = null)
+    {
+        $this->parent = $parent;
+
+        return $this;
+    }
+
+    /**
+     * Get parent
+     *
+     * @return \ripnet\EvoBundle\Entity\ROM 
+     */
+    public function getParent()
+    {
+        return $this->parent;
+    }
 }
