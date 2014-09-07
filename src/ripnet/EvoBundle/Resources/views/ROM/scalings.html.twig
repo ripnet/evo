@@ -1,0 +1,26 @@
+{% extends "ripnetEvoBundle::rom.html.twig" %}
+
+{% block title %}Scalings{% endblock %}
+
+{% block romBody %}
+<h1 class="page-header">All Scalings</h1>
+
+<pre class="prettyprint lang-xml" style="overflow: auto; word-wrap: normal; white-space: pre;">
+{% for scaling in scalings %}
+{% filter escape %}
+{% include 'ripnetEvoBundle:Templates:scaling.xml.twig' with { 'scaling': scaling } %}
+{% endfilter %}
+{% endfor %}</pre>
+{% endblock %}
+{% block javascripts %}
+<script src="https://google-code-prettify.googlecode.com/svn/loader/prettify.js"></script>
+<script type="text/javascript">
+    $(document).ready(function() {
+        prettyPrint();
+    });
+
+</script>
+{% endblock %}
+{% block stylesheets %}
+    <link href="{{ asset("css/prettify.css") }}" rel="stylesheet">
+{% endblock %}

@@ -98,6 +98,10 @@ class ROM
      */
     protected $parent;
 
+    public function getName()
+    {
+        return $this->year . " " . $this->make . " " . $this->market . " " . $this->model . " " . $this->submodel;
+    }
 
     /**
      * Constructor
@@ -475,5 +479,51 @@ class ROM
     public function getChecksummodule()
     {
         return $this->checksummodule;
+    }
+
+    /**
+     * Set caseid
+     *
+     * @param string $caseid
+     * @return ROM
+     */
+    public function setCaseid($caseid)
+    {
+        $this->caseid = $caseid;
+
+        return $this;
+    }
+
+    /**
+     * Get caseid
+     *
+     * @return string 
+     */
+    public function getCaseid()
+    {
+        return $this->caseid;
+    }
+
+    /**
+     * Set ecuid
+     *
+     * @param string $ecuid
+     * @return ROM
+     */
+    public function setEcuid($ecuid)
+    {
+        $this->ecuid = $ecuid;
+
+        return $this;
+    }
+
+    /**
+     * Get ecuid
+     *
+     * @return string 
+     */
+    public function getEcuid()
+    {
+        return $this->ecuid;
     }
 }

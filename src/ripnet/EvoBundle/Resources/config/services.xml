@@ -27,5 +27,9 @@
             <!--<argument type="service" id="router" />-->
             <argument type="service" id="security.context" />
         </service>
+        <service id="menu.romside" class="Knp\Menu\MenuItem" scope="request" factory-method="createRomSideMenu" factory-service="acme_main.menu_builder">
+            <tag name="knp_menu.menu" alias="romside" />
+            <argument type="service" id="request" />
+        </service>
     </services>
 </container>

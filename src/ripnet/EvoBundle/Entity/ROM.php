@@ -98,6 +98,10 @@ class ROM
      */
     protected $parent;
 
+    public function getName()
+    {
+        return $this->year . " " . $this->make . " " . $this->market . " " . $this->model . " " . $this->submodel;
+    }
 
     /**
      * Constructor

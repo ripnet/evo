@@ -1,0 +1,5 @@
+{% import "ripnetEvoBundle:Templates:macros.xml.twig" as xml %}
+{% set attributes = ['name', 'units', 'toexpr', 'frexpr', 'format', 'min', 'max', 'inc', 'storagetype', 'endian', 'storagebits'] %}
+<scaling {% for attrib in attributes %}{{ xml.att(attrib, attribute(scaling, attrib)) }}{% endfor %}{% if scaling.scalingDatas|length == 0 %}/>{% else %}>
+{% for scalingdata in scaling.scalingDatas %}{% include 'ripnetEvoBundle:Templates:scalingdata.xml.twig'  with { 'scalingdata': scalingdata } %}{% endfor %}</scaling>{% endif %}
+

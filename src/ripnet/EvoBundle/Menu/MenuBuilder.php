@@ -40,4 +40,15 @@ class MenuBuilder
 
         return $menu;
     }
+
+    public function createRomSideMenu(Request $request)
+    {
+        $menu = $this->factory->createItem('root');
+        $menu->setChildrenAttribute('class', 'nav nav-sidebar');
+        $menu->addChild('ROMs', array('route' => 'rom'));
+        $menu->addChild('ROM Tree', array('route' => 'rom_tree'));
+        $menu->addChild('ROM Scalings', array('route' => 'rom_scalings'));
+
+        return $menu;
+    }
 }

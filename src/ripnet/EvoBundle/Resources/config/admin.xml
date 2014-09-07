@@ -3,9 +3,21 @@
            xsi:schemaLocation="http://symfony.com/schema/dic/services/services-1.0.xsd">
     <services>
         <service id="sonata.admin.rom" class="ripnet\EvoBundle\Admin\ROMAdmin">
-            <tag name="sonata.admin" manager_type="orm" group="Content" label="ROM"/>
+            <tag name="sonata.admin" manager_type="orm" group="OpenECU" label="ROMs"/>
             <argument />
             <argument>ripnet\EvoBundle\Entity\ROM</argument>
+            <argument />
+        </service>
+        <service id="sonata.admin.scaling" class="ripnet\EvoBundle\Admin\ScalingAdmin">
+            <tag name="sonata.admin" manager_type="orm" group="OpenECU" label="Scalings"/>
+            <argument />
+            <argument>ripnet\EvoBundle\Entity\Scaling</argument>
+            <argument />
+        </service>
+        <service id="sonata.admin.scalingdata" class="ripnet\EvoBundle\Admin\ScalingDataAdmin">
+            <tag name="sonata.admin" manager_type="orm" group="OpenECU" label="Static Scaling Data"/>
+            <argument />
+            <argument>ripnet\EvoBundle\Entity\ScalingData</argument>
             <argument />
         </service>
     </services>
