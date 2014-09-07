@@ -35,6 +35,16 @@ class ROM
     /**
      * @ORM\Column(type="string", length=128)
      */
+    protected $caseid;
+
+    /**
+     * @ORM\Column(type="string", length=128)
+     */
+    protected $ecuid;
+
+    /**
+     * @ORM\Column(type="string", length=128)
+     */
     protected $make;
 
     /**
@@ -465,5 +475,51 @@ class ROM
     public function getChecksummodule()
     {
         return $this->checksummodule;
+    }
+
+    /**
+     * Set caseid
+     *
+     * @param string $caseid
+     * @return ROM
+     */
+    public function setCaseid($caseid)
+    {
+        $this->caseid = $caseid;
+
+        return $this;
+    }
+
+    /**
+     * Get caseid
+     *
+     * @return string 
+     */
+    public function getCaseid()
+    {
+        return $this->caseid;
+    }
+
+    /**
+     * Set ecuid
+     *
+     * @param string $ecuid
+     * @return ROM
+     */
+    public function setEcuid($ecuid)
+    {
+        $this->ecuid = $ecuid;
+
+        return $this;
+    }
+
+    /**
+     * Get ecuid
+     *
+     * @return string 
+     */
+    public function getEcuid()
+    {
+        return $this->ecuid;
     }
 }

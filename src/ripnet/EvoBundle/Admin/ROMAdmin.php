@@ -17,6 +17,8 @@ class ROMAdmin extends Admin
             ->add('parent', 'entity', array('class' => 'ripnet\EvoBundle\Entity\ROM', 'required' => false))
             ->add('internalidaddress', 'text', array('label' => 'Internal ID Address'))
             ->add('internalidhex', 'text', array('label' => 'Internal ID Hex'))
+            ->add('caseid', 'text', array('label' => 'Case ID', 'required' => false))
+            ->add('ecuid', 'text', array('label' => 'ECU ID', 'required' => false))
             ->add('make')
             ->add('market')
             ->add('model')
@@ -25,7 +27,7 @@ class ROMAdmin extends Admin
             ->add('year')
             ->add('flashmethod')
             ->add('memmodel')
-            ->add('checksummodule')
+            ->add('checksummodule', 'text', array('label' => 'Checksum Module', 'required' => false))
         ;
     }
 

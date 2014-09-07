@@ -35,6 +35,16 @@ class ROM
     /**
      * @ORM\Column(type="string", length=128)
      */
+    protected $caseid;
+
+    /**
+     * @ORM\Column(type="string", length=128)
+     */
+    protected $ecuid;
+
+    /**
+     * @ORM\Column(type="string", length=128)
+     */
     protected $make;
 
     /**
