@@ -24,7 +24,11 @@ _sonata_admin:
     type: sonata_admin
     prefix: /admin
 
+logout:
+    pattern: /logout
 
+menu_admin:
+    pattern: /admin
 
 google_login:
     pattern: /login/check-google

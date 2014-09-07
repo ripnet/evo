@@ -17,5 +17,15 @@
         </service>
     </services>
     -->
-
+    <services>
+        <service id="acme_main.menu_builder" class="ripnet\EvoBundle\Menu\MenuBuilder">
+            <argument type="service" id="knp_menu.factory" />
+        </service>
+        <service id="menu.main" class="Knp\Menu\MenuItem" scope="request" factory-method="createMainMenu" factory-service="acme_main.menu_builder">
+            <tag name="knp_menu.menu" alias="main" />
+            <argument type="service" id="request" />
+            <!--<argument type="service" id="router" />-->
+            <argument type="service" id="security.context" />
+        </service>
+    </services>
 </container>

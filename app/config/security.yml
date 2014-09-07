@@ -61,7 +61,7 @@ security:
                     service: my_user_provider
             logout:
                 path: /logout
-                target: /connect
+                target: /
 
     access_control:
         #- { path: ^/login, roles: IS_AUTHENTICATED_ANONYMOUSLY, requires_channel: https }
@@ -79,6 +79,6 @@ security:
 
     acl:
         connection: default
-        
+
 parameters:
     security.acl.permission.map.class: Sonata\AdminBundle\Security\Acl\Permission\AdminPermissionMap
