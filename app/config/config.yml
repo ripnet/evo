@@ -56,10 +56,21 @@ doctrine:
         # if using pdo_sqlite as your database driver, add the path in parameters.yml
         # e.g. database_path: "%kernel.root_dir%/data/data.db3"
         # path:     "%database_path%"
+        types:
+            json: Sonata\Doctrine\Types\JsonType
 
     orm:
         auto_generate_proxy_classes: "%kernel.debug%"
-        auto_mapping: true
+        #auto_mapping: true
+        entity_managers:
+            default:
+                mappings:
+                    ApplicationSonataUserBundle: ~
+                    SonataUserBundle: ~
+                    FOSUserBundle: ~
+                    ripnetEvoBundle: ~
+
+
 
 # Swiftmailer Configuration
 swiftmailer:
@@ -70,8 +81,8 @@ swiftmailer:
     spool:     { type: memory }
 
 sonata_block:
-    #default_contexts: [sonata_page_bundle]
-    default_contexts: [cms]
+    default_contexts: [sonata_page_bundle]
+    #default_contexts: [cms]
     blocks:
         sonata.admin.block.admin_list:
             contexts:   [admin]
@@ -86,10 +97,24 @@ sonata_block:
         #sonata.media.block.media:
         #sonata.media.block.gallery:
         #sonata.media.block.feature_media:
+        sonata.user.block.menu:    # used to display the menu in profile pages
+        #sonata.user.block.account: # used to display menu option (login option)
 
 sonata_admin:
     title:      Evo Definitions
     #title_logo: bundles/acmedemo/img/fancy_acme_logo.png
+    security:
+        handler: sonata.admin.security.handler.acl
+        information:
+            GUEST:    [VIEW, LIST]
+            STAFF:    [EDIT, LIST, CREATE]
+            EDITOR:   [OPERATOR, EXPORT]
+            ADMIN:    [MASTER]
+        # permissions not related to an object instance and also to be available when objects do not exist
+        # the DELETE admin permission means the user is allowed to batch delete objects
+        admin_permissions: [CREATE, LIST, DELETE, UNDELETE, EXPORT, OPERATOR, MASTER]
+        # permission related to the objects
+        object_permissions: [VIEW, EDIT, DELETE, UNDELETE, OPERATOR, MASTER, OWNER]
 
 sonata_doctrine_orm_admin:
     # default value is null, so doctrine uses the value defined in the configuration
@@ -99,3 +124,32 @@ sonata_doctrine_orm_admin:
         force: true
 
     templates:
+
+fos_user:
+    db_driver: orm # other valid values are 'mongodb', 'couchdb' and 'propel'
+    firewall_name: admin
+    user_class: Application\Sonata\UserBundle\Entity\User
+    group:
+        group_class:   Application\Sonata\UserBundle\Entity\Group
+        group_manager: sonata.user.orm.group_manager
+    service:
+        user_manager: sonata.user.orm.user_manager
+
+#sonata_user:
+#    security_acl: true
+#    manager_type: orm # can be orm or mongodb
+
+hwi_oauth:
+    firewall_name: admin
+    connect:
+        confirmation: true
+    resource_owners:
+        google:
+            type: google
+            client_id: %google_client_id%
+            client_secret: %google_secret%
+            scope: "email profile"
+    fosub:
+        username_iterations: 30
+        properties:
+            google: googleID
