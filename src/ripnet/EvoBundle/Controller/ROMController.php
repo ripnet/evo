@@ -52,4 +52,17 @@ class ROMController extends Controller
         );
     }
 
+    /**
+     * @Route("/tables", name="rom_tables")
+     * @Template()
+     */
+    public function tablesAction()
+    {
+        $repository = $this->getDoctrine()->getRepository('ripnetEvoBundle:Table');
+        $tables = $repository->findAll();
+
+        return array(
+            'tables'  => $tables,
+        );
+    }
 }

@@ -19,6 +19,7 @@ class Scaling
         'int32'     => 'int32',
         'uint32'    => 'uint32',
         'float'     => 'float',
+        'bloblist'  => 'bloblist',
     );
 
     public static $endianTypes = array(
@@ -98,6 +99,21 @@ class Scaling
      * @ORM\OneToMany(targetEntity="ScalingData", mappedBy="scaling")
      */
     protected $scalingDatas;
+
+    /**
+     * @ORM\OneToMany(targetEntity="Table", mappedBy="scaling")
+     */
+    protected $tableScalings;
+
+    /**
+     * @ORM\OneToMany(targetEntity="Table", mappedBy="xAxisScaling")
+     */
+    protected $xAxisScalings;
+
+    /**
+     * @ORM\OneToMany(targetEntity="Table", mappedBy="yAxisScaling")
+     */
+    protected $yAxisScalings;
 
     /**
      * Constructor
@@ -424,5 +440,104 @@ class Scaling
     public function getFrexpr()
     {
         return $this->frexpr;
+    }
+
+    /**
+     * Add tableScalings
+     *
+     * @param \ripnet\EvoBundle\Entity\Table $tableScalings
+     * @return Scaling
+     */
+    public function addTableScaling(\ripnet\EvoBundle\Entity\Table $tableScalings)
+    {
+        $this->tableScalings[] = $tableScalings;
+
+        return $this;
+    }
+
+    /**
+     * Remove tableScalings
+     *
+     * @param \ripnet\EvoBundle\Entity\Table $tableScalings
+     */
+    public function removeTableScaling(\ripnet\EvoBundle\Entity\Table $tableScalings)
+    {
+        $this->tableScalings->removeElement($tableScalings);
+    }
+
+    /**
+     * Get tableScalings
+     *
+     * @return \Doctrine\Common\Collections\Collection 
+     */
+    public function getTableScalings()
+    {
+        return $this->tableScalings;
+    }
+
+    /**
+     * Add xAxisScalings
+     *
+     * @param \ripnet\EvoBundle\Entity\Table $xAxisScalings
+     * @return Scaling
+     */
+    public function addXAxisScaling(\ripnet\EvoBundle\Entity\Table $xAxisScalings)
+    {
+        $this->xAxisScalings[] = $xAxisScalings;
+
+        return $this;
+    }
+
+    /**
+     * Remove xAxisScalings
+     *
+     * @param \ripnet\EvoBundle\Entity\Table $xAxisScalings
+     */
+    public function removeXAxisScaling(\ripnet\EvoBundle\Entity\Table $xAxisScalings)
+    {
+        $this->xAxisScalings->removeElement($xAxisScalings);
+    }
+
+    /**
+     * Get xAxisScalings
+     *
+     * @return \Doctrine\Common\Collections\Collection 
+     */
+    public function getXAxisScalings()
+    {
+        return $this->xAxisScalings;
+    }
+
+    /**
+     * Add yAxisScalings
+     *
+     * @param \ripnet\EvoBundle\Entity\Table $yAxisScalings
+     * @return Scaling
+     */
+    public function addYAxisScaling(\ripnet\EvoBundle\Entity\Table $yAxisScalings)
+    {
+        $this->yAxisScalings[] = $yAxisScalings;
+
+        return $this;
+    }
+
+    /**
+     * Remove yAxisScalings
+     *
+     * @param \ripnet\EvoBundle\Entity\Table $yAxisScalings
+     */
+    public function removeYAxisScaling(\ripnet\EvoBundle\Entity\Table $yAxisScalings)
+    {
+        $this->yAxisScalings->removeElement($yAxisScalings);
+    }
+
+    /**
+     * Get yAxisScalings
+     *
+     * @return \Doctrine\Common\Collections\Collection 
+     */
+    public function getYAxisScalings()
+    {
+        return $this->yAxisScalings;
     }
 }

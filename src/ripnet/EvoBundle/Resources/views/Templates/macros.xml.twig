@@ -1,1 +1,3 @@
-{% macro att(name, value) %}{% if value is not empty %}{{ name }}="{{ value }}" {% endif %}{% endmacro %}
+{% macro att(name, value) %}{% if value is not empty %} {{ name }}="{{ value }}"{% endif %}{% endmacro %}
+{% macro axis(table, axis, attributes) %}{% import _self as xml %}{% for attrib in attributes %}{{ xml.att(attrib|lower, attribute(table, axis ~ 'Axis' ~ attrib)) }}{% endfor %}{% endmacro %}
+

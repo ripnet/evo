@@ -1,18 +1,11 @@
 {% extends "::base.html.twig" %}
 {% block body %}
-<div class="jumbotron">
-    <h1>
-        Definitions for EcuFlash
-    </h1>
-    <p>
-        This site will host definitions for EcuFlash, for the Mitsubishi Evolution and Ralliart platforms (maybe more later).
-    </p>
+    <div class="container">
 
-</div>
+        <h3>Scalings and ROMs Imported</h3>
+        <p>ROMs have been imported into the databse. See the relationship tree <a href="{{ path('rom_tree') }}">here</a>. Also, all the scalings have been imported. You can view all of them <a href="{{ path('rom_scalings') }}">here</a>.</p>
 
-<div>
-    <h2>Disclaimer <small>You should read this.</small></h2>
-    <p>This version of the website contains the files from the latest version of EcuFlash, which were from <a href="http://goldenevo.com/">GoldenEvo.com</a>.</p>
-    <p>Please consider donating to that site, they did the hard work.</p>
-</div>
+        <h3>Download XML Files</h3>
+        <p>You can download the XML files that come with EcuFlash <a href="{{ path('download') }}">here</a>. This is only a temporary measure until the new database is populated and generating XMLs.</p>
+    </div>
 {% endblock %}

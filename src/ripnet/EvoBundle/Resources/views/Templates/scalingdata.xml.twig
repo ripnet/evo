@@ -1,3 +1,3 @@
 {% import "ripnetEvoBundle:Templates:macros.xml.twig" as xml %}
 {% set attributes = ['name', 'value'] %}
-    <data {% for attrib in attributes %}{{ xml.att(attrib, attribute(scalingdata, attrib)) }}{% endfor %}/>
+    <data{% for attrib in attributes %}{{ xml.att(attrib, attribute(scalingdata, attrib)) }}{% endfor %} />

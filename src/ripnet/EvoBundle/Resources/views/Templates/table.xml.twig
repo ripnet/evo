@@ -1,0 +1,18 @@
+{% import "ripnetEvoBundle:Templates:macros.xml.twig" as xml %}
+{% set attributes = ['category', 'scaling', 'flipX', 'flipY', 'swapXY'] %}
+{% set axisAttributes = ['Name', 'Type', 'Elements', 'Scaling'] %}
+<table name="{{ table.name|raw }}" type="{{ table.tableType }}"{% for attrib in attributes %}{{ xml.att(attrib, attribute(table, attrib)) }}{% endfor %}{% if (table.xAxisType is not empty) or (table.yAxisType is not empty) %}>
+{% if table.xAxisType is not empty %}
+    <table{{ xml.axis(table, 'x', axisAttributes) }}{% if table.xAxisType == 'Static X Axis' %}>
+{% for val in table.xAxisStaticValuesArray %}       <data>{{ val }}</data>
+{% endfor %}    </table>{% else %}/>{% endif %}
+
+{% endif %}
+{% if table.yAxisType is not empty %}
+    <table{{ xml.axis(table, 'y', axisAttributes) }}{% if table.yAxisType == 'Static Y Axis' %}>
+{% for val in table.yAxisStaticValuesArray %}       <data>{{ val }}</data>
+{% endfor %}    </table>{% else %}/>{% endif %}
+
+{% endif %}
+</table>{% else %}/>{% endif %}
+

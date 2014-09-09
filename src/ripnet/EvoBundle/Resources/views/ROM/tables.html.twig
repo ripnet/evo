@@ -1,0 +1,56 @@
+{% extends "ripnetEvoBundle::rom.html.twig" %}
+
+{% block title %}Tables{% endblock %}
+
+{% block romBody %}
+<h1 class="page-header">All Tables</h1>
+<a href="#xml" class="btn btn-info">View XML</a>
+<a name="listing"></a><h3>Listing</h3>
+<table class="table">
+    <thead>
+    <tr>
+        <th>Name</th>
+        <th>Category</th>
+        <th>Type</th>
+        <th>flipX</th>
+        <th>flipY</th>
+        <th>swapXY</th>
+        <th>Scaling</th>
+    </tr>
+    </thead>
+    <tbody>
+    {% for table in tables %}
+        <tr>
+            <td>{{ table.name }}</td>
+            <td>{{ table.category }}</td>
+            <td>{{ table.tableType }}</td>
+            <td>{{ table.flipX }}</td>
+            <td>{{ table.flipY }}</td>
+            <td>{{ table.swapXY }}</td>
+            <td>{{ table.scaling }}</td>
+        </tr>
+    {% endfor %}
+    </tbody>
+<table>
+
+<a name="xml"></a><h3>XML</h3>
+<pre class="prettyprint lang-xml" style="overflow: auto; word-wrap: normal; white-space: pre;">
+{% for table in tables %}
+{% filter escape %}
+{% include 'ripnetEvoBundle:Templates:table.xml.twig' with { 'table': table } %}
+{% endfilter %}
+{% endfor %}</pre>
+
+{% endblock %}
+    {% block javascripts %}
+        <script src="https://google-code-prettify.googlecode.com/svn/loader/prettify.js"></script>
+        <script type="text/javascript">
+            $(document).ready(function() {
+                prettyPrint();
+            });
+
+        </script>
+    {% endblock %}
+    {% block stylesheets %}
+    <link href="{{ asset("css/prettify.css") }}" rel="stylesheet">
+{% endblock %}
