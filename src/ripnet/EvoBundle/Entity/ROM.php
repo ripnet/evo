@@ -98,6 +98,11 @@ class ROM
      */
     protected $parent;
 
+    /**
+     * @ORM\OneToMany(targetEntity="ROMTable", mappedBy="rom", cascade={"persist", "remove"}, orphanRemoval=TRUE)
+     */
+    protected $romTables;
+
     public function getName()
     {
         return $this->year . " " . $this->make . " " . $this->market . " " . $this->model . " " . $this->submodel;
@@ -525,5 +530,38 @@ class ROM
     public function getEcuid()
     {
         return $this->ecuid;
+    }
+
+    /**
+     * Add romTables
+     *
+     * @param \ripnet\EvoBundle\Entity\ROMTable $romTables
+     * @return ROM
+     */
+    public function addRomTable(\ripnet\EvoBundle\Entity\ROMTable $romTables)
+    {
+        $this->romTables[] = $romTables;
+
+        return $this;
+    }
+
+    /**
+     * Remove romTables
+     *
+     * @param \ripnet\EvoBundle\Entity\ROMTable $romTables
+     */
+    public function removeRomTable(\ripnet\EvoBundle\Entity\ROMTable $romTables)
+    {
+        $this->romTables->removeElement($romTables);
+    }
+
+    /**
+     * Get romTables
+     *
+     * @return \Doctrine\Common\Collections\Collection 
+     */
+    public function getRomTables()
+    {
+        return $this->romTables;
     }
 }

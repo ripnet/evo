@@ -149,6 +149,11 @@ class Table
     protected $yAxisStaticValues;
 
     /**
+     * @ORM\OneToMany(targetEntity="ROMTable", mappedBy="table", cascade={"persist", "remove"}, orphanRemoval=TRUE)
+     */
+    protected $romTables;
+
+    /**
      * Get id
      *
      * @return integer 
@@ -570,5 +575,45 @@ class Table
     public function getTableType()
     {
         return $this->tableType;
+    }
+    /**
+     * Constructor
+     */
+    public function __construct()
+    {
+        $this->romTables = new \Doctrine\Common\Collections\ArrayCollection();
+    }
+
+    /**
+     * Add romTables
+     *
+     * @param \ripnet\EvoBundle\Entity\ROMTable $romTables
+     * @return Table
+     */
+    public function addRomTable(\ripnet\EvoBundle\Entity\ROMTable $romTables)
+    {
+        $this->romTables[] = $romTables;
+
+        return $this;
+    }
+
+    /**
+     * Remove romTables
+     *
+     * @param \ripnet\EvoBundle\Entity\ROMTable $romTables
+     */
+    public function removeRomTable(\ripnet\EvoBundle\Entity\ROMTable $romTables)
+    {
+        $this->romTables->removeElement($romTables);
+    }
+
+    /**
+     * Get romTables
+     *
+     * @return \Doctrine\Common\Collections\Collection 
+     */
+    public function getRomTables()
+    {
+        return $this->romTables;
     }
 }

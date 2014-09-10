@@ -1,0 +1,47 @@
+<?php
+
+namespace ripnet\EvoBundle\Entity;
+
+use Doctrine\ORM\Mapping as ORM;
+
+/**
+ * @ORM\Entity
+ * @ORM\Table(name="rom_table")
+ */
+class ROMTable
+{
+    /**
+     * @ORM\Column(type="integer")
+     * @ORM\Id
+     * @ORM\GeneratedValue(strategy="AUTO")
+     */
+    protected $id;
+
+    /**
+     * @ORM\ManyToOne(targetEntity="ROM", inversedBy="romTables")
+     * @ORM\JoinColumn(name="rom_id", referencedColumnName="id", nullable=FALSE)
+     */
+    protected $rom;
+
+    /**
+     * @ORM\ManyToOne(targetEntity="Table", inversedBy="romTables")
+     * @ORM\JoinColumn(name="table_id", referencedColumnName="id", nullable=FALSE)
+     */
+    protected $table;
+
+    /**
+     * @ORM\Column(type="string", length=16)
+     */
+    protected $address;
+
+    /**
+     * @ORM\Column(type="string", length=16)
+     */
+    protected $xAddress;
+
+    /**
+     * @ORM\Column(type="string", length=16)
+     */
+    protected $yAddress;
+
+}

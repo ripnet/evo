@@ -98,6 +98,11 @@ class ROM
      */
     protected $parent;
 
+    /**
+     * @ORM\OneToMany(targetEntity="ROMTable", mappedBy="rom", cascade={"persist", "remove"}, orphanRemoval=TRUE)
+     */
+    protected $romTables;
+
     public function getName()
     {
         return $this->year . " " . $this->make . " " . $this->market . " " . $this->model . " " . $this->submodel;

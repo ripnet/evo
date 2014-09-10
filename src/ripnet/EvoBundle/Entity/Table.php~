@@ -149,6 +149,11 @@ class Table
     protected $yAxisStaticValues;
 
     /**
+     * @ORM\OneToMany(targetEntity="ROMTable", mappedBy="table", cascade={"persist", "remove"}, orphanRemoval=TRUE)
+     */
+    protected $romTables;
+
+    /**
      * Get id
      *
      * @return integer 
