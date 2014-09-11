@@ -4,7 +4,7 @@ namespace ripnet\EvoBundle\Entity;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
- * @ORM\Entity
+ * @ORM\Entity(repositoryClass="ripnet\EvoBundle\Entity\ROMRepository")
  * @ORM\Table(name="rom")
  */
 class ROM

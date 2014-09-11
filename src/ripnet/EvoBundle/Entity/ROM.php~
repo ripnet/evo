@@ -4,7 +4,7 @@ namespace ripnet\EvoBundle\Entity;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
- * @ORM\Entity
+ * @ORM\Entity(repositoryClass="ripnet\EvoBundle\Entity\ROMRepository")
  * @ORM\Table(name="rom")
  */
 class ROM
@@ -530,5 +530,38 @@ class ROM
     public function getEcuid()
     {
         return $this->ecuid;
+    }
+
+    /**
+     * Add romTables
+     *
+     * @param \ripnet\EvoBundle\Entity\ROMTable $romTables
+     * @return ROM
+     */
+    public function addRomTable(\ripnet\EvoBundle\Entity\ROMTable $romTables)
+    {
+        $this->romTables[] = $romTables;
+
+        return $this;
+    }
+
+    /**
+     * Remove romTables
+     *
+     * @param \ripnet\EvoBundle\Entity\ROMTable $romTables
+     */
+    public function removeRomTable(\ripnet\EvoBundle\Entity\ROMTable $romTables)
+    {
+        $this->romTables->removeElement($romTables);
+    }
+
+    /**
+     * Get romTables
+     *
+     * @return \Doctrine\Common\Collections\Collection 
+     */
+    public function getRomTables()
+    {
+        return $this->romTables;
     }
 }

@@ -31,7 +31,8 @@ class ROMController extends Controller
     public function treeAction()
     {
         $repository = $this->getDoctrine()->getRepository('ripnetEvoBundle:ROM');
-        $parents = $repository->findBy(array('parent' => null));
+        //$parents = $repository->findBy(array('parent' => null));
+        $parents = $repository->getParents();
 
         return array(
                 'parents'  => $parents,
