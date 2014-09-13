@@ -6,3 +6,7 @@ services:
         class: "%my_user_provider.class%"
         #this is the place where the properties are passed to the UserProvider - see config.yml
         arguments: [@fos_user.user_manager,{google: google_id}, @session]
+    ripnet.twig.ripnet_extension:
+        class: ripnet\EvoBundle\Twig\ripnetExtension
+        tags:
+            - { name: twig.extension }

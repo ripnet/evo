@@ -19,9 +19,12 @@ class ROMController extends Controller
      */
     public function indexAction()
     {
+        $repository = $this->getDoctrine()->getRepository('ripnetEvoBundle:ROM');
+
+        $roms = $repository->findAll();
         return array(
-                // ...
-            );
+            'roms'      => $roms,
+        );
     }
 
     /**
@@ -64,6 +67,28 @@ class ROMController extends Controller
 
         return array(
             'tables'  => $tables,
+        );
+    }
+
+    /**
+     * @Route("/generate/{romid}", name="rom_generate")
+     * @Template()
+     */
+    public function generateAction($romid)
+    {
+        $repository = $this->getDoctrine()->getRepository('ripnetEvoBundle:ROM');
+        $rom = $repository->findOneBy(array('xmlid' => $romid));
+
+        $repository = $this->getDoctrine()->getRepository('ripnetEvoBundle:ROMTable');
+        $tables = $repository->findBy(array('rom' => $rom));
+
+        $r = $this->getDoctrine()->getEntityManager()
+            ->createQuery('SELECT r, c FROM ripnetEvoBundle:ROM r JOIN r.children c')
+            ->getResult();
+
+        return array(
+            'rom'       => $rom,
+            'tables'    => $tables,
         );
     }
 }

@@ -1,0 +1,12 @@
+{% extends "ripnetEvoBundle::rom.html.twig" %}
+
+{% block title %}Generate ROM XML{% endblock %}
+
+{% block romBody %}
+        <h3>{{ rom.xmlid }} {{ rom.year }} {{ rom.market }} {{ rom.make }} {{ rom.model }} {{ rom.submodel }} <small>{{ rom.xmlid }}.xml</small></h3>
+<pre class="prettyprint lang-xml" style="overflow: auto; word-wrap: normal; white-space: pre;">
+{% filter escape %}
+{% include 'ripnetEvoBundle:Templates:rom.xml.twig' with { 'rom': rom, 'tables': tables } %}
+{% endfilter %}
+</pre>
+{% endblock %}

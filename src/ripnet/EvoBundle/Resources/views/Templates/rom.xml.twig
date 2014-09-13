@@ -1,0 +1,20 @@
+{% macro tg(name, value) %}{% if value is not empty %}          <{{ name }}>{{ value }}</{{ name }}>
+{% endif %}{% endmacro %}
+{% import _self as xml1 %}
+<rom>
+    <romid>
+{% set attributes = ['xmlid', 'internalidaddress', 'internalidhex', 'caseid', 'ecuid', 'make', 'market', 'model', 'submodel', 'transmission', 'year', 'flashmethod', 'memmodel', 'checksummodule'] %}
+{% for attrib in attributes %}{{ xml1.tg(attrib, attribute(rom, attrib)) }}{% endfor %}
+    </romid>
+    <notes>
+
+    </notes>
+
+{% if rom.parent is not empty %}    <include>{{ rom.parent }}</include>{% endif %}
+
+{% filter indent(1) %}{% for table in tables %}
+{% include 'ripnetEvoBundle:Templates:table.xml.twig' with { 'table': table.table, 'address': table.address, 'xAddress': table.xAddress, 'yAddress': table.yAddress } %}
+{% endfor %}
+{% endfilter %}
+
+</rom>

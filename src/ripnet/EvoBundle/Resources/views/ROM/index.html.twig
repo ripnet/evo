@@ -4,5 +4,35 @@
 
 {% block romBody %}
 <h1>ROMs</h1>
-    <p>Select link on left.</p>
+    <p>Select links on the left for interesting information, or use the form below to generate the files you need.</p>
+
+    <h3>Generate Files</h3>
+    <div class="alert alert-warning alert-dismissible" role="alert">
+        <button type="button" class="close" data-dismiss="alert"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+        <strong>Warning!</strong> This automatic generation is still incomplete. Use it at your own risk!
+    </div>
+<form class="form-inline" role="form">
+    <div class="form-group">
+        <label for="xmlid">ROM</label>
+        <select name="xmlid" id="xmlid" class="form-control">
+            {% for rom in roms %}
+            <option value="{{ path('rom_generate', {'romid' : rom.xmlid }) }}">{{ rom.xmlid }} {{ rom.year }} {{ rom.market }} {{ rom.make }} {{ rom.model }} {{ rom.submodel }}</option>
+            {% endfor %}
+        </select>
+    </div>
+    <a class="btn btn-default" id="displayButton">Display XML</a>
+</form>
+
+{% endblock %}
+
+{% block javascripts %}
+<script type="text/javascript">
+    $(function() {
+        $("#displayButton").click(function () {
+            window.location = $("#xmlid").val();
+        });
+    });
+</script>
+
+
 {% endblock %}
