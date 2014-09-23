@@ -26,17 +26,17 @@ class MenuBuilder
 
 
         $menu->addChild('Home', array('route' => 'home'));
-        $menu->addChild('Download ROM XMLs (from EcuFlash)', array(
+        /*$menu->addChild('Download ROM XMLs (from EcuFlash)', array(
             'route' => 'download',
             //'routeParameters' => array('id' => 42)
-        ));
-        $menu->addChild('ROMs (new)', array('route' => 'rom'));
+        ));*/
+        $menu->addChild('ROMs', array('route' => 'rom'));
 
         $routeName = $request->get('_route');
         switch (true)
         {
             case preg_match('/^rom/', $routeName):
-                $menu->getChild('ROMs (new)')->setCurrent(true);
+                $menu->getChild('ROMs')->setCurrent(true);
             default:
         }
 

@@ -35,12 +35,12 @@ class ROMTable
     protected $address;
 
     /**
-     * @ORM\Column(type="string", length=16)
+     * @ORM\Column(type="string", length=16, nullable=TRUE)
      */
     protected $xAddress;
 
     /**
-     * @ORM\Column(type="string", length=16)
+     * @ORM\Column(type="string", length=16, nullable=TRUE)
      */
     protected $yAddress;
 

@@ -10,7 +10,7 @@ use Symfony\Component\Finder\Finder;
 use ripnet\EvoBundle\Entity\XMLFile;
 
 /**
- * Import XML definitions into database.
+ * Import files in ROM-XMLs into database.
  *
  * @author Tom Young <ripnet@gmail.com>
  */
@@ -23,9 +23,7 @@ class ImportCommand extends Command
     {
         $this
             ->setName('evo:import')
-            ->setDescription('Import definitions into database.')
-            ->addArgument('directory', InputArgument::REQUIRED, 'Directory that contains XML definitons.')
-        ;
+            ->setDescription('Import XMLs into database. Will remove what\'s currently there');
 
     }
 
@@ -34,13 +32,21 @@ class ImportCommand extends Command
      */
     protected function execute(InputInterface $input, OutputInterface $output)
     {
+        $this->container = $this->getApplication()->getKernel()->getContainer();
+        $output->writeln(sprintf('Reading files <comment>please wait...</comment>!'));
         $finder = new Finder();
-        $finder->files()->in($input->getArgument('directory'))->name('*.xml');
+        $finder->files()->in($this->container->get('kernel')->getRootDir() . '/../ROM-XMLs')->name('*.xml')->sortByName();
+
+        $em = $this->container->get('doctrine')->getManager();
         foreach ($finder as $file)
         {
-            $output->writeln('Parsing file: ' . $file);
-
-            // TODO: everything
+            $dbFile = new XMLFile();
+            $dbFile->setName($file->getFileName());
+            $dbFile->setContents($file->getContents());
+            $em->persist($dbFile);
         }
+        $em->flush();
+
+        $output->writeln("done.");
     }
 }

@@ -32,5 +32,11 @@
             <argument>ripnet\EvoBundle\Entity\ROMTable</argument>
             <argument />
         </service>
+        <service id="sonata.admin.categories" class="ripnet\EvoBundle\Admin\CategoryAdmin">
+            <tag name="sonata.admin" manager_type="orm" group="OpenECU" label="Table Categories"/>
+            <argument />
+            <argument>ripnet\EvoBundle\Entity\Category</argument>
+            <argument />
+        </service>
     </services>
 </container>

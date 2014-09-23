@@ -71,7 +71,8 @@ class Table
     protected $tableType;
 
     /**
-     * @ORM\Column(type="string", length=255)
+     * @ORM\ManyToOne(targetEntity="Category", inversedBy="tables")
+     * @ORM\JoinColumn(name="category_id", referencedColumnName="id")
      */
     protected $category;
 

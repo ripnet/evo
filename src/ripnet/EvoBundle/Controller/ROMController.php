@@ -62,9 +62,11 @@ class ROMController extends Controller
      */
     public function tablesAction()
     {
-        $repository = $this->getDoctrine()->getRepository('ripnetEvoBundle:Table');
-        $tables = $repository->findAll();
-
+        //$repository = $this->getDoctrine()->getRepository('ripnetEvoBundle:Table');
+        //$tables = $repository->findAll();
+        $tables = $this->getDoctrine()->getEntityManager()
+            ->createQuery('SELECT t, c, s FROM ripnetEvoBundle:Table t JOIN t.category c JOIN t.scaling s ORDER BY c.weight')
+            ->getResult();
         return array(
             'tables'  => $tables,
         );
@@ -79,13 +81,16 @@ class ROMController extends Controller
         $repository = $this->getDoctrine()->getRepository('ripnetEvoBundle:ROM');
         $rom = $repository->findOneBy(array('xmlid' => $romid));
 
-        $repository = $this->getDoctrine()->getRepository('ripnetEvoBundle:ROMTable');
-        $tables = $repository->findBy(array('rom' => $rom));
-
-        $r = $this->getDoctrine()->getEntityManager()
-            ->createQuery('SELECT r, c FROM ripnetEvoBundle:ROM r JOIN r.children c')
+        //$repository = $this->getDoctrine()->getRepository('ripnetEvoBundle:ROMTable');
+        //$tables = $repository->findBy(array('rom' => $rom));
+        $tables = $this->getDoctrine()->getEntityManager()
+            ->createQuery('SELECT rt, r, t, c, s FROM ripnetEvoBundle:ROMTable rt JOIN rt.rom r JOIN rt.table t JOIN t.category c JOIN t.scaling s WHERE r.id = ' . $rom->getId() . ' ORDER BY c.weight')
             ->getResult();
 
+        /*$r = $this->getDoctrine()->getEntityManager()
+            ->createQuery('SELECT r, c FROM ripnetEvoBundle:ROM r JOIN r.children c')
+            ->getResult();
+        */
         return array(
             'rom'       => $rom,
             'tables'    => $tables,

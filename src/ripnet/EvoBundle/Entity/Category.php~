@@ -1,0 +1,38 @@
+<?php
+namespace ripnet\EvoBundle\Entity;
+
+use Doctrine\ORM\Mapping as ORM;
+
+
+/**
+ * @ORM\Entity
+ * @ORM\Table(name="scaling")
+ *
+ */
+class Category
+{
+    /**
+     * @ORM\Column(type="integer")
+     * @ORM\Id
+     * @ORM\GeneratedValue(strategy="AUTO")
+     */
+    protected $id;
+
+
+    /**
+     * @ORM\Column(type="string", length=255, unique=true)
+     */
+    protected $name;
+
+    /**
+     * @ORM\Column(type="integer")
+     */
+    protected $weight;
+
+    /**
+     * @ORM\OneToMany(targetEntity="Table", mappedBy="Category")
+     */
+    protected $tables;
+
+
+}
