@@ -1,6 +1,8 @@
 {% extends "::base.html.twig" %}
 {% block body %}
     <div class="container">
+        <h3>ROM Chart</h3>
+        <p>Added a <a href="{{ path('rom_chart') }}">chart</a> to display validated/unvalidated/missing values for each ROM</p>
         <h3>Categories</h3>
         <p>Update: Moved categories to their own table, and added weights (for ordering).</p>
         <p>Next:<ul><li>Weights to tables</li><li>XML Download (only displays now)</li></ul></p>
@@ -12,5 +14,14 @@
 
         <h3>Download XML Files</h3>
         <p>You can download the XML files that come with EcuFlash <a href="{{ path('download') }}">here</a>. This is only a temporary measure until the new database is populated and generating XMLs.</p>
+    </div>
+    <div class="container">
+        <form action="https://www.paypal.com/cgi-bin/webscr" method="post" target="_top">
+            <input type="hidden" name="cmd" value="_s-xclick">
+            <input type="hidden" name="hosted_button_id" value="UX2XAKTBLM2J6">
+            <input type="image" src="https://www.paypalobjects.com/en_US/i/btn/btn_donate_LG.gif" border="0" name="submit" alt="PayPal - The safer, easier way to pay online!">
+            <img alt="" border="0" src="https://www.paypalobjects.com/en_US/i/scr/pixel.gif" width="1" height="1">
+        </form>
+
     </div>
 {% endblock %}
