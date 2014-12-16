@@ -44,6 +44,18 @@ class ROMTable
      */
     protected $yAddress;
 
+
+
+    /**
+     * @ORM\Column(type="boolean")
+     */
+    protected $validated;
+    
+    /**
+     * @ORM\Column(type="boolean")
+     */
+    protected $na;
+
     public function __toString()
     {
         return $this->getRom() . " " . $this->getTable();
@@ -172,5 +184,28 @@ class ROMTable
     public function getTable()
     {
         return $this->table;
+    }
+
+    /**
+     * Set validated
+     *
+     * @param boolean $validated
+     * @return ROMTable
+     */
+    public function setValidated($validated)
+    {
+        $this->validated = $validated;
+
+        return $this;
+    }
+
+    /**
+     * Get validated
+     *
+     * @return boolean 
+     */
+    public function getValidated()
+    {
+        return $this->validated;
     }
 }

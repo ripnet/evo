@@ -58,6 +58,7 @@ class MenuBuilder
         $menu->addChild('ROM Tree', array('route' => 'rom_tree'));
         $menu->addChild('ROM Scalings', array('route' => 'rom_scalings'));
         $menu->addChild('ROM Tables', array('route' => 'rom_tables'));
+        $menu->addChild('Definition Chart', array('route' => 'rom_chart'));
 
         return $menu;
     }

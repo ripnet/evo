@@ -96,4 +96,65 @@ class ROMController extends Controller
             'tables'    => $tables,
         );
     }
+
+    /**
+     * @Route("/chart", name="rom_chart")
+     * @Template()
+     */
+    public function chartAction()
+    {
+        $romRepo = $this->getDoctrine()->getRepository('ripnetEvoBundle:ROM');
+        $roms = $romRepo->getParents();
+
+        $tableRepo = $this->getDoctrine()->getRepository('ripnetEvoBundle:Table');
+        $tables = $tableRepo->findAll();
+
+        $defs = $this->getDoctrine()->getRepository('ripnetEvoBundle:ROMTable');
+        $allDefs = $defs->findAll();
+
+        $r = array();
+        $rindex = 0;
+        $rindexes = array();
+        foreach ($roms as $rom)
+        {
+            $r[$rindex] = 0;
+            $rindexes[$rom->getId()] = $rindex;
+            $rindex++;
+        }
+
+        $a = array();
+        foreach ($tables as $table)
+        {
+            $a[$table->getId()] = $r;
+        }
+
+        foreach ($allDefs as $def)
+        {
+
+            $romid = $def->getRom()->getId();
+            if (array_key_exists($romid, $rindexes))
+            {
+
+                if ($def->getNa())
+                {
+                    $a[$def->getTable()->getId()][$rindexes[$romid]] = 1;
+                } elseif ($def->getValidated())
+                {
+                    $a[$def->getTable()->getId()][$rindexes[$romid]] = 2;
+                } else {
+                    $a[$def->getTable()->getId()][$rindexes[$romid]] = 3;
+
+                }
+            }
+        }
+
+
+
+        return array(
+            'roms'      => $roms,
+            'tables'    => $tables,
+            'a'         => $a,
+            'num'       => count($roms) -1,
+        );
+    }
 }

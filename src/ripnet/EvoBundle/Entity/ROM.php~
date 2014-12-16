@@ -105,7 +105,7 @@ class ROM
 
     public function getName()
     {
-        return $this->year . " " . $this->make . " " . $this->market . " " . $this->model . " " . $this->submodel;
+        return $this->year . " " . $this->make . " " . $this->market . " " . $this->model . " " . $this->submodel . " " . $this->transmission;
     }
 
     /**

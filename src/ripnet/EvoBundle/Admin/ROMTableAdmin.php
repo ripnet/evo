@@ -29,6 +29,8 @@ class ROMTableAdmin extends Admin
             ->add('address', null, array('label' => "Table Address"))
             ->add('xAddress', null, array('label' => "X Axis Address", 'required' => false))
             ->add('yAddress', null, array('label' => "Y Axis Address", 'required' => false))
+            ->add('na', null, array('label' => 'Not Applicable', 'required' => false))
+            ->add('validated', null, array('label' => 'Validated', 'required' => false))
         ;
     }
 

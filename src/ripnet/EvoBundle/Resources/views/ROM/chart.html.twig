@@ -1,0 +1,37 @@
+{% extends "ripnetEvoBundle::romWithoutMenu.html.twig" %}
+
+{% block title %}Definition Chart{% endblock %}
+
+{% block romBody %}
+<h1 class="page-header">Definition Chart</h1>
+
+<table class="sticker">
+    <thead>
+    <tr>
+        <th>Definition</th>
+        {% for rom in roms %}
+            <th><a title="{{ rom.name }}">{{ rom.xmlid }}</a></th>
+        {% endfor %}
+    </tr>
+    </thead>
+    <tbody>
+    {% for table in tables %}
+    <tr>
+        <th class="tablename"><a title="{{ table.name }}">{{ table.name|truncate(40) }}</a></th>
+        {% set q = table.id %}
+        {% for i in 0..num %}
+            {% set status = a[q][i] %}
+            <td>{% if status == 0 %}<span class="label label-danger">missing</span>{% elseif status == 1 %}<span class="label label-default">n/a</span>{% elseif status == 2 %}<span class="label label-success">Validated</span>{% elseif status == 3 %}<span class="label label-warning">Unvalidated</span>{% endif %}</td>
+        {% endfor %}
+    </tr>
+    {% endfor %}
+    </tbody>
+</table>
+{% endblock %}
+{% block javascripts %}
+    <script src="http://cdnjs.cloudflare.com/ajax/libs/jquery-throttle-debounce/1.1/jquery.ba-throttle-debounce.min.js"></script>
+    <script src="{{ asset('js/jquery.stickyheader.js') }}"></script>
+{% endblock %}
+{% block stylesheets %}
+    <link rel="stylesheet" href="{{ asset('css/sticky.css') }}" />
+{% endblock %}
